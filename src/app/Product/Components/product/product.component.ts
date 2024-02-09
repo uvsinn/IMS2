@@ -2,16 +2,10 @@ import { Component } from '@angular/core';
 import { ProductService } from '../../Services/product/product.service';
 import { Product } from '../../Models/product';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AvlNgBindersModule } from '@avl-controls/ng-binders';
-import { HttpClientModule } from '@angular/common/http';
-//import '@avl-controls/core/dist/avl-card/avl-card';
 
-//import '@avl-controls/core/dist/avl-button/avl-button';
 
 @Component({
   selector: 'app-product',
-   //imports: [],
-  //  providers:  [ ProductService ],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -42,6 +36,9 @@ export class ProductComponent {
     }
   }
 
+  addProduct(){
+    console.log("Added")
+  }
 
     CreateSubmit(){
       console.log(this.newProduct);
