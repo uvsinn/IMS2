@@ -1,24 +1,28 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AppComponent } from './app.component';
-import { RouterOutlet } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-
-import { ProductModule } from './Product/product.module';
+import { HttpClientModule} from '@angular/common/http';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AvlCommonModule } from '@avl-ng-controls/common';
+import { ProductModule } from './Product/product.module';
+
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    CommonModule,
-    RouterOutlet,
-    HttpClientModule,  
-    ProductModule,
     BrowserModule,
-    AppRoutingModule
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,    
+    AppRoutingModule,
+    AvlCommonModule,
+    ProductModule
   ],
+  providers: [],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "",
+    "types": ["node"]
+  },
+  "files": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "**/*.d.ts",
+    "../node_modules/@avl-vizbox-develop/browser-support/**/*.ts",
+    "../node_modules/@avl-controls/**/*.ts",
+    "../node_modules/@avl-ng-controls/**/*.ts"
+  ]
+}

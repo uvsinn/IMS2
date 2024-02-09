@@ -1,0 +1,123 @@
+@import '@angular/material/theming';
+@mixin dialog-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  mat-dialog-container .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  mat-dialog-container .header .close-icon {
+    --avl-dialog-background-color: var(--avl-background-color);
+    --avl-dialog-header-title-color: var(--avl-foreground-color);
+    --avl-dialog-text-color: var(--avl-foreground-medium-color);
+    --avl-dialog-close-icon-color: var(--avl-icon-default-color);
+    --avl-dialog-close-icon-ink-pressed-color: var(--avl-ink-default-pressed-color);
+    --avl-dialog-close-icon-ink-focus-color: var(--avl-ink-default-focus-color);
+    --avl-dialog-close-icon-ink-hover-color: var(--avl-ink-default-hover-color);
+    margin-top: 7px;
+    margin-right: -12px;
+    flex: 0 0 48px;
+    cursor: pointer;
+    --avl-icon-button-color: var(--avl-dialog-close-icon-color);
+    --avl-icon-ink-hover-color: transparent;
+    --avl-icon-ink-focus-color: transparent;
+    --avl-icon-ink-pressed-color: transparent;
+    --avl-icon-button-ink-pressed-color: var(--avl-dialog-close-icon-ink-pressed-color);
+    --avl-icon-button-ink-focus-color: var(--avl-dialog-close-icon-ink-focus-color);
+    --avl-icon-button-ink-hover-color: var(--avl-dialog-close-icon-ink-hover-color);
+  }
+
+  body[typography='avl'] mat-dialog-container h1 {
+    flex: 1 1 100%;
+    margin: 12px 0 0 0;
+  }
+
+  mat-dialog-container.mat-dialog-container {
+    padding: 0px 24px 24px;
+  }
+
+  mat-dialog-container .mat-dialog-content {
+    display: flex;
+  }
+
+  mat-dialog-container .mat-dialog-content p {
+    margin: 0;
+  }
+
+  mat-dialog-container .mat-dialog-content p:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  mat-dialog-container .mat-dialog-content avl-icon {
+    margin-right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  mat-dialog-container .mat-dialog-actions {
+    justify-content: end;
+    margin-top: 12px;
+    margin-right: -8px;
+    padding: 0 0 16px 0;
+  }
+
+  .cdk-overlay-dark-backdrop {
+    background-color: var(--avl-scrim-color);
+  }
+
+  /* fullscreen dialog */
+  .cdk-overlay-pane.fullscreen-dialog {
+    max-width: 100vw !important;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .cdk-overlay-pane.fullscreen-dialog mat-dialog-container {
+    display: flex;
+  }
+
+  body[typography='avl'] .cdk-overlay-pane.fullscreen-dialog mat-dialog-container h1 {
+    margin: 0;
+  }
+
+  .cdk-overlay-pane.fullscreen-dialog mat-dialog-container .header {
+    flex-direction: row-reverse;
+    flex: 1 0 56px;
+    box-shadow: var(--avl-box-shadow-4dp);
+    margin: 0 -24px 24px;
+    padding: 0 24px;
+  }
+  .cdk-overlay-pane.fullscreen-dialog mat-dialog-container .mat-dialog-content {
+    --avl-dialog-separator-color: var(--avl-divider-color);
+    display: flex;
+    flex: 1 1 100%;
+    max-height: 100%;
+    border-bottom: 1px solid var(--avl-dialog-separator-color);
+  }
+
+  .cdk-overlay-pane.fullscreen-dialog mat-dialog-container .header .close-icon {
+    margin-top: 0;
+    margin-right: 12px;
+    margin-left: -12px;
+  }
+
+  .cdk-overlay-pane.fullscreen-dialog mat-dialog-container .mat-dialog-actions {
+    margin-top: 8px;
+    margin-right: -8px;
+    padding: 0 0 8px 0;
+  }
+
+  .cdk-overlay-pane.fullscreen-dialog mat-dialog-container .mat-dialog-actions[align='end'] {
+    justify-content: flex-start;
+  }
+
+  @media only screen and (max-width: 492px) {
+    body[typography='avl'] .cdk-overlay-pane {
+      max-width: 100vw !important;
+      height: 100vh;
+    }
+  }
+}

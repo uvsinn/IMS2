@@ -1,0 +1,9 @@
+{
+  "/v1": {
+    "target": "http://localhost:50352/",
+    "secure": false,
+    "pathRewrite": {
+      "^/v2": ""
+    }
+  }
+}

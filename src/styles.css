@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@avl-styles/controls/dist/avl-controls.css';
+@import '~@avl-styles/common/dist/avl-styles.css';
+@import '~@avl-styles/svgs/dist/avl-iconlibrary-svg.css';
+@import '~@avl-styles/icons/dist/material-design-icons.css';
+@import '~@avl-styles/icons/dist/font-awesome.css';
+
+body {
+  margin: 0px;
+  min-height: 90vh;
+}
+
+body,
+body[theme='light'] {
+  --avl-product-color: rgb(94, 143, 255);
+  --avl-product-hover-color: rgba(94, 143, 255, 0.2);
+  --avl-product-focus-color: rgba(94, 143, 255, 0.3);
+  --avl-product-selected-color: rgba(94, 143, 255, 0.4);
+  --avl-product-selected-color-2: rgba(94, 143, 255, 0.08);
+  --avl-product-dark-color: rgb(81, 95, 144);
+  --avl-product-light-color: rgba(94, 143, 255);
+}
+
+body[theme='dark'] {
+  --avl-product-color: rgb(81, 95, 144);
+  --avl-product-hover-color: rgba(81, 95, 144, 0.2);
+  --avl-product-focus-color: rgba(81, 95, 144, 0.3);
+  --avl-product-selected-color: rgba(81, 95, 144, 0.4);
+  --avl-product-selected-color-2: rgba(81, 95, 144, 0.08);
+  --avl-product-dark-color: rgb(81, 95, 144);
+  --avl-product-light-color: rgba(94, 143, 255);
+}
+
+.fa {
+  font-size: 20px;
+}

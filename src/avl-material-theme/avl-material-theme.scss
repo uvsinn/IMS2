@@ -1,0 +1,59 @@
+@import '@angular/material/theming';
+@import '@avl-styles/controls/dist/avl-controls.css';
+@import '@avl-styles/common/dist/avl-styles.css';
+
+// Plus imports for other components in your app.
+@import 'avl-components';
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat-palette($mat-pink, 50);
+$app-accent: mat-palette($mat-amber, 400, 600, 800);
+
+// The warn palette is optional (defaults to red).
+$app-warn: mat-palette($mat-red);
+/* $app-primary: --avl-product-color;
+$app-accent:  --avl-product-focus-color;
+
+// The warn palette is optional (defaults to red).
+$app-warn:    --avl-warning-color; */
+
+// Create the theme object (a Sass map containing all of the palettes).
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-gray, 50);
+$dark-accent: mat-palette($mat-blue, 400, 600, 800);
+$dark-warn: mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($app-theme);
+[theme='light'] {
+  @include angular-material-theme($app-theme);
+}
+[theme='dark'] {
+  @include angular-material-theme($dark-theme);
+}
+
+.msg-elevation {
+  @include mat-elevation(0);
+
+  &.opened {
+    @include mat-elevation-transition;
+    @include mat-elevation(8);
+  }
+}
+.mat-drawer-side {
+  border-right: none;
+}
+
+@include dialog-theme($app-theme);

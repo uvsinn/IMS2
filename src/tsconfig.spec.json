@@ -1,0 +1,26 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "baseUrl": "",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "files": [
+    "test.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "**/*.ts",
+    "../node_modules/@avl-vizbox-develop/browser-support/**/*.ts",
+    "../node_modules/@avl-controls/**/*.ts",
+    "../node_modules/@avl-ng-controls/**/*.ts",
+    "../node_modules/@avl-ng-controls/*/node_modules/**/*.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "../node_modules/@avl-ng-controls/**/*.spec.ts"
+  ]
+}

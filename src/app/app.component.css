@@ -1,0 +1,35 @@
+:host {
+  --avl-settings-dialog-theme-label-color: var(--avl-foreground-color);
+}
+avl-app-layout {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+}
+
+.no-bullet {
+  list-style: none;
+}
+.toolbarThemeIcon {
+  --avl-icon-button-color: var(--avl-app-bar-item-color, #fff);
+}
+
+avl-overflow-menu avl-icon-button {
+  --avl-icon-button-color: var(--avl-on-primary-color);
+}
+
+avl-dropdown {
+  width: 100%;
+}
+
+avl-icon-button#closeIcon {
+  width: 60px;
+  height: 60px;
+}
+
+avl-icon-button#closeIcon {
+  --avl-icon-button-color: var(--avl-emphasis-medium-color);
+}
