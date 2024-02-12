@@ -1,21 +1,208 @@
-<div class="container">
-    <h1 class="text-center">Inventory Management</h1>
-    <avl-button id="eventsButton" (click)="addProduct()">Add</avl-button>
+<div class="table-container">
+  <h1 class="text-center">Inventory Management</h1>
+  <avl-button id="eventsButton" (click)="openAddDialog()">Add</avl-button>
 
-    <avl-card id="titleContentActions">
-      <h2 slot="title">Title goes here</h2>
-      <h3 slot="subtitle">Subtitle goes here</h3>
-      <div slot="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      </div>
-      <div slot="actions">
-        <avl-button>Action 1</avl-button>
-        <avl-button>Action 2</avl-button>
-      </div>
-    </avl-card>
-
+  <table class="full-width-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Available</th>
+        <th>Quantity</th>
+        <th width="250px">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{product.id}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.amount}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.isAvailable}}</td>
+        <td>{{product.quantity}}</td>
+        <td>
+          <avl-button id="openViewDialog" (click)="openViewDialog();view(product)">VIEW</avl-button>
+          <avl-button id="openEditDialog" (click)="openEditDialog();edit(product)">EDIT</avl-button>
+          <avl-button id="openDeleteDialog" (click)="openDeleteDialog();del(product)">DELETE</avl-button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
+<!-- VIEW DIALOG -->
+<avl-dialog
+  id="viewDialog"
+  [(open)]="openView"
+  (openChange)="openChange($event)"
+  [closeOnScrimClick]="false"
+  [complex]="true"
+>
+  <ng-template #content>
+    <avl-dialog-content>
+        <div>
+            <strong>ID:</strong><p>{{prd.id}}</p>
+        </div>
+        <div>
+            <strong>Name:</strong><p>{{prd.name}}</p>
+        </div>
+        <div>
+            <strong>Amount:</strong><p>{{prd.amount}}</p>
+        </div>
+        <div>
+            <strong>Description:</strong><p>{{prd.description}}</p>
+        </div>
+        <div>
+            <strong>IsAvailable:</strong><p>{{prd.isAvailable}}</p>
+        </div>
+        <div>
+            <strong>Quantity:</strong><p>{{prd.quantity}}</p>
+        </div>
+    </avl-dialog-content>
 
+    <avl-dialog-footer>
+      <avl-button (click)="openView = !openView">Close</avl-button>
+    </avl-dialog-footer>
+
+  </ng-template>
+</avl-dialog>
+
+
+<!-- EDIT DIALOG -->
+<avl-dialog
+  id="editDialog"
+  [(open)]="openEdit"
+  (openChange)="openChange($event)"
+  [closeOnScrimClick]="false"
+  [complex]="true"
+>
+  <ng-template #content>
+    <avl-dialog-content>
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="name" style="font-weight: bold;">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="editedProduct.name" required class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="description" style="font-weight: bold;">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="editedProduct.description" class="form-control" rows="4" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="amount" style="font-weight: bold;">Amount:</label>
+        <input type="number" id="amount" name="amount" [(ngModel)]="editedProduct.amount" required class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">Availability:</label>
+        <div class="form-check">
+          <input type="radio" id="available" name="isAvailable" [(ngModel)]="editedProduct.isAvailable" [value]="true" class="form-check-input" style="margin-right: 8px;">
+          <label for="available" class="form-check-label">Available</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="not-available" name="isAvailable" [(ngModel)]="editedProduct.isAvailable" [value]="false" class="form-check-input" style="margin-right: 8px;">
+          <label for="not-available" class="form-check-label">Not Available</label>
+        </div>
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="quantity" style="font-weight: bold;">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" [(ngModel)]="editedProduct.quantity" required class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+      
+    </avl-dialog-content>
+
+
+    <avl-dialog-footer>
+      <avl-button (click)="updateSubmit();openEdit = !openEdit">Save</avl-button>
+    </avl-dialog-footer>
+    <avl-dialog-footer>
+      <avl-button (click)="openEdit = !openEdit">Close</avl-button>
+    </avl-dialog-footer>
+
+  </ng-template>
+</avl-dialog>
+
+
+<!-- DELETE DIALOG -->
+<avl-dialog
+  id="deleteDialog"
+  [(open)]="openDelete"
+  (openChange)="openChange($event)"
+  [closeOnScrimClick]="false"
+  [complex]="true"
+>
+  <ng-template #content>
+    <avl-dialog-content>
+      <br>
+      <br>
+      Are you sure you want to delete this product!
+    </avl-dialog-content>
+        
+    <avl-dialog-footer>
+      <avl-button (click)="confirmDelete();openDelete = !openDelete">Delete</avl-button>
+    </avl-dialog-footer>
+    <avl-dialog-footer>
+      <avl-button (click)="openDelete = !openDelete">Close</avl-button>
+    </avl-dialog-footer>
+
+  </ng-template>
+</avl-dialog>
+
+
+<!-- ADD DIALOG -->
+<avl-dialog
+  id="addDialog"
+  [(open)]="openAdd"
+  (openChange)="openChange($event)"
+  [closeOnScrimClick]="false"
+  [complex]="true"
+>
+  <ng-template #content>
+    <avl-dialog-content>
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="name" style="font-weight: bold;">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="newProduct.name" required class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="description" style="font-weight: bold;">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="newProduct.description" class="form-control" rows="4" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"></textarea>
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="amount" style="font-weight: bold;">Amount:</label>
+        <input type="number" id="amount" name="amount" [(ngModel)]="newProduct.amount" required class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label style="font-weight: bold;">Availability:</label>
+        <div class="form-check">
+          <input type="radio" id="available" name="isAvailable" [(ngModel)]="newProduct.isAvailable" [value]="true" class="form-check-input" style="margin-right: 8px;">
+          <label for="available" class="form-check-label">Available</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="not-available" name="isAvailable" [(ngModel)]="newProduct.isAvailable" [value]="false" class="form-check-input" style="margin-right: 8px;">
+          <label for="not-available" class="form-check-label">Not Available</label>
+        </div>
+      </div>
+      
+      <div class="form-group" style="margin-bottom: 20px;">
+        <label for="quantity" style="font-weight: bold;">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" [(ngModel)]="newProduct.quantity" required class="form-control" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+      </div>
+      
+    </avl-dialog-content>
+
+
+    <avl-dialog-footer>
+      <avl-button (click)="add();openAdd = !openAdd">Add</avl-button>
+    </avl-dialog-footer>
+    <avl-dialog-footer>
+      <avl-button (click)="openAdd = !openAdd">Close</avl-button>
+    </avl-dialog-footer>
+
+  </ng-template>
+</avl-dialog>

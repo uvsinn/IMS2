@@ -1,0 +1,15 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Add horizontal scroll if needed */
+  }
+  
+  .full-width-table {
+    width: 100%;
+    border-collapse: collapse; /* Optional: collapse table borders */
+  }
+  
+  .full-width-table th,
+  .full-width-table td {
+    padding: 8px; /* Optional: Adjust padding as needed */
+    border: 1px solid #ddd; /* Optional: Define table borders */
+  }

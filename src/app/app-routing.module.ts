@@ -4,15 +4,9 @@ import { ProductComponent } from './Product/Components/product/product.component
 
 const routes: Routes = [
   {
-    path:'', 
-    component: ProductComponent, 
-    children: [
-      {
-        path: '',
-        loadChildren: () => import('./Product/product.module').then(m => m.ProductModule)
-      }
-    ]
-}
+    path:'',
+    component: ProductComponent
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
